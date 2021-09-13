@@ -58,7 +58,7 @@
                             break;
 
                             default:
-                            include "Includes/view_all_posts.php";
+                            include "Includes/view_all_comments.php";
                             break;
                         }
 

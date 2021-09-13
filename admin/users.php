@@ -45,12 +45,12 @@
                         }
                         
                         switch ($source) {
-                            case 'add_post';
-                            include "Includes/add_post.php";
+                            case 'add_user';
+                            include "Includes/add_user.php";
                             break;
 
-                            case 'edit_post';
-                            include "Includes/edit_post.php";
+                            case 'edit_user';
+                            include "Includes/edit_user.php";
                             break;
 
                             case '200';
@@ -58,7 +58,7 @@
                             break;
 
                             default:
-                            include "Includes/view_all_posts.php";
+                            include "Includes/view_all_users.php";
                             break;
                         }
 
