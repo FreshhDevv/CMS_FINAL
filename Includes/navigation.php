@@ -30,14 +30,19 @@
                     <li>
                         <a href="admin">Admin</a>
                     </li>
+                    <li>
+                        <a href="registration.php">Registration</a>
+                    </li>
 
                     <?php
+                    //Restarting the sessions
+                    if (session_status() == PHP_SESSION_NONE) session_start();
 
                     if(isset($_SESSION['user_role'])) {
                         if(isset($_GET['p_id'])) {
                         $the_post_id = $_GET['p_id'];
 
-                        echo "<li><a href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>"; 
+                        echo "<li><a href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
                         }
                         
                     }
