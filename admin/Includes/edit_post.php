@@ -102,7 +102,7 @@ if (isset($_GET['p_id'])) {
 
 <div class="form-group">
 <select name="post_status" id="">
-    <option value='<?php $post_status; ?>'><?php echo $post_status; ?></option>
+    <option value='<?php echo $post_status; ?>'><?php echo $post_status; ?></option>
 
     <?php
 

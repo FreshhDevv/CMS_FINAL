@@ -34,7 +34,7 @@
                         <h1 class="page-header">
                             Welcome to admin
                             
-                            <small><?php echo $_SESSION['username'] ?></small>
+                            <small><?php echo $_SESSION['username']; ?></small>
                         </h1>
                        
                     </div>
@@ -94,7 +94,7 @@
                     $select_all_comments = mysqli_query($connection, $query);
                     $comment_count = mysqli_num_rows($select_all_comments);
 
-                    echo "<div class='huge'>{$comment_count}</div>"
+                    echo "<div class='huge'>{$comment_count}</div>";
 
                     ?>
                       <div>Comments</div>
