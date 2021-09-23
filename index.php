@@ -32,14 +32,32 @@
             }
 
 
+            if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+                $post_query_count = "SELECT * FROM posts";
+            } else {
+                $post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
+            }
 
-            $post_query_count = "SELECT * FROM posts";
+            //if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') 
+
+
+            //$post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
             $find_count = mysqli_query($connection, $post_query_count);
             $count = mysqli_num_rows($find_count);
+
+            // if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {}
+
+            if($count < 1) {
+                echo "<h2 class='text-center'>NO POSTS AVAILABLE</h2>";
+            } else { 
 
             $count = ceil($count / $per_page);
 
             $query = "SELECT * FROM posts LIMIT $page_1, $per_page";
+
+            
+
+
             $select_all_posts_query = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($select_all_posts_query)) {
@@ -51,7 +69,7 @@
                     $post_content = substr($row['post_content'], 0, 200);
                     $post_status = $row['post_status'];
 
-                    if($post_status == 'published') {
+                    
 
                     
 

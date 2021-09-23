@@ -24,6 +24,13 @@
 
 <!-- Login -->
 <div class="well">
+
+<?php if(isset($_SESSION['user_role'])): ?>
+    <h4>Logged in as <?php echo $_SESSION['username'];?></h4>
+
+    <a href="Includes/logout.php" class="btn btn-primary">Logout</a>
+
+<?php else: ?>
     <h4>Login</h4>
     <form action="Includes/login.php" method="POST">
     <div class="form-group">
@@ -39,6 +46,11 @@
 
     </form> 
     <!-- /.input-group -->
+
+<?php endif; ?>
+
+
+    
 </div>
 
 
