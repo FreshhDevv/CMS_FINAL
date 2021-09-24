@@ -1,58 +1,13 @@
-<?php  include "includes/db.php"; ?>
- <?php  include "includes/header.php"; ?>
+<?php  include "Includes/db.php"; ?>
+ <?php  include "Includes/header.php"; ?>
 
  <?php
 
- if(isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $user_firstname = $_POST['user_firstname'];
-    $user_lastname = $_POST['user_lastname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+if(isset($_POST['submit'])) {
 
-    if(!empty($username) && !empty($user_firstname) && !empty($user_lastname) && !empty($email) &&!empty($password)) {
-
-
-        $username = mysqli_real_escape_string($connection, $username);
-        $user_firstname = mysqli_real_escape_string($connection, $user_firstname);
-        $user_lastname = mysqli_real_escape_string($connection, $user_lastname);
-    $email = mysqli_real_escape_string($connection, $email);
-    $password = mysqli_real_escape_string($connection, $password);
-
-    $password = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12) );
-
-
-
-
-
-    // $query = "SELECT randSalt FROM users";
-    // $select_randsalt_query = mysqli_query($connection, $query);
-
-    // if(!$select_randsalt_query) {
-    //     die("QUERY FAILED". mysqli_error($connection));
-    // }
-    // $row = mysqli_fetch_array($select_randsalt_query);
-    //     $salt = $row['randSalt'];
-
-        
-
-        $query = "INSERT INTO users (username, user_firstname, user_lastname, user_email, user_password, user_role) ";
-        $query .= "VALUES ('{$username}', '{$user_firstname}','{$user_lastname}','{$email}','{$password}','subscriber' )";
-        $register_user_query = mysqli_query($connection, $query);
-        if(!$register_user_query) {
-            die("QUERY FAILED ". mysqli_error($connection));
-        }
-
-        $message = "Your registration has been submitted";
-
-    } else {
-        $message = "Fields cannot be empty";
-    }
 
     
     
- } else {
-     $message = "";
  }
 
  ?>

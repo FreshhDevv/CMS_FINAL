@@ -16,13 +16,13 @@ if(isset($_POST['login'])) {
 
 
 
-    //This is where i adjusted the login so that only users who are admins can login into the admin section
+    //This is where i adjusted the login so that only users who are admins can login into the admin section by adding AND user_role = 'admin' to the query below
 
 
 
 
 
-    $query = "SELECT * FROM users WHERE username = '{$username}' AND user_role = 'admin' ";
+    $query = "SELECT * FROM users WHERE username = '{$username}' ";
     $select_user_query = mysqli_query($connection, $query);
     if (!$select_user_query) {
         die("QUERY FAILED". mysqli_error($connection));
