@@ -1,5 +1,9 @@
 <?php
 
+function redirect($location) {
+    return header("Location:" . $location);
+}
+
 function escape($string) {
     global $connection;
     mysqli_real_escape_string($connection, trim($string));
@@ -75,20 +79,20 @@ function insert_categories() {
 function findAllCategories() {
     global $connection;
     $query = "SELECT * FROM categories"; //use "LIMIT 3" if you want to limit the number of categories displayed on the sidebar to 3
-                                    $select_categories = mysqli_query($connection, $query);
-         
-                                    while($row = mysqli_fetch_assoc($select_categories)) {
-                                    $cat_id = $row['cat_id'];
-                                    $cat_title = $row['cat_title'];
+    $select_categories = mysqli_query($connection, $query);
 
-                                    echo "<tr>";
-                                    echo "<td>{$cat_id}</td>";
-                                    echo "<td>{$cat_title}</td>";
-                                    echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
-                                    echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
-                                    echo "</tr>";
-                                    
-                                    }
+    while($row = mysqli_fetch_assoc($select_categories)) {
+        $cat_id = $row['cat_id'];
+        $cat_title = $row['cat_title'];
+
+        echo "<tr>";
+        echo "<td>{$cat_id}</td>";
+        echo "<td>{$cat_title}</td>";
+        echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
+        echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
+        echo "</tr>";
+    
+    }
 }
 
 function deleteCategories() {
@@ -100,5 +104,137 @@ function deleteCategories() {
         $delete_query = mysqli_query($connection, $query);
         header("Location:categories.php");
     }
+
+}
+
+
+function recordCount($table) {
+    global $connection;
+
+    $query = "SELECT * FROM " . $table;
+    $select_all_post = mysqli_query($connection, $query);
+
+    $result = mysqli_num_rows($select_all_post);
+
+    confirmQuery($result);
+    return $result;
+}
+
+function checkStatus($table, $column, $status) {
+    global $connection;;
+    $query = "SELECT * FROM $table WHERE $column = '$status'";
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+    return mysqli_num_rows($result);
+
+}
+
+function checkUserRole($table, $column, $role) {
+    global $connection;
+
+    $query = "SELECT * FROM $table WHERE $column = '$role'";
+    $select_all_subscribers = mysqli_query($connection, $query);
+    return mysqli_num_rows($select_all_subscribers);
+}
+
+function is_admin($username) {
+    global $connection;
+
+    $query = "SELECT user_role FROM users WHERE username = '$username'";
+    
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+
+    $row = mysqli_fetch_array($result);
+
+    if($row['user_role'] == 'admin') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function username_exists($username) {
+
+    global $connection;
+
+    $query = "SELECT username FROM users WHERE username = '$username'";
+    
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+
+    if(mysqli_num_rows($result) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+
+
+}
+
+function email_exists($email) {
+
+    global $connection;
+
+    $query = "SELECT user_email FROM users WHERE user_email = '$email'";
+    
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+
+    if(mysqli_num_rows($result) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+
+
+}
+
+function register_user($username, $user_firstname, $user_lastname, $email, $password) {
+    global $connection; 
+
+
+    $username = $_POST['username'];
+    $user_firstname = $_POST['user_firstname'];
+    $user_lastname = $_POST['user_lastname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+
+    if(email_exists($email)) {
+        
+    }
+
+
+
+
+
+    if(!empty($username) && !empty($user_firstname) && !empty($user_lastname) && !empty($email) &&!empty($password)) {
+
+
+        $username = mysqli_real_escape_string($connection, $username);
+        $user_firstname = mysqli_real_escape_string($connection, $user_firstname);
+        $user_lastname = mysqli_real_escape_string($connection, $user_lastname);
+        $email = mysqli_real_escape_string($connection, $email);
+        $password = mysqli_real_escape_string($connection, $password);
+
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12) );
+
+
+
+
+
+
+        $query = "INSERT INTO users (username, user_firstname, user_lastname, user_email, user_password, user_role) ";
+        $query .= "VALUES ('{$username}', '{$user_firstname}','{$user_lastname}','{$email}','{$password}','subscriber' )";
+        $register_user_query = mysqli_query($connection, $query);
+        
+        confirmQuery($register_user_query);
+
+    //$message = "Your registration has been submitted";
+
+    } 
+
+
 
 }
