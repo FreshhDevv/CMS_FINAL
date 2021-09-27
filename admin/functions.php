@@ -172,6 +172,46 @@ function username_exists($username) {
 
 }
 
+function user_firstname_exists($user_firstname) {
+
+    global $connection;
+
+    $query = "SELECT user_firstname FROM users WHERE user_firstname = '$user_firstname'";
+    
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+
+    if(mysqli_num_rows($result) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+
+
+}
+
+
+function user_lastname_exists($user_lastname) {
+
+    global $connection;
+
+    $query = "SELECT user_lastname FROM users WHERE user_lastname = '$user_lastname'";
+    
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+
+    if(mysqli_num_rows($result) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+
+
+}
+
+
+
+
 function email_exists($email) {
 
     global $connection;
@@ -194,24 +234,6 @@ function register_user($username, $user_firstname, $user_lastname, $email, $pass
     global $connection; 
 
 
-    $username = $_POST['username'];
-    $user_firstname = $_POST['user_firstname'];
-    $user_lastname = $_POST['user_lastname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-
-    if(email_exists($email)) {
-        
-    }
-
-
-
-
-
-    if(!empty($username) && !empty($user_firstname) && !empty($user_lastname) && !empty($email) &&!empty($password)) {
-
-
         $username = mysqli_real_escape_string($connection, $username);
         $user_firstname = mysqli_real_escape_string($connection, $user_firstname);
         $user_lastname = mysqli_real_escape_string($connection, $user_lastname);
@@ -219,11 +241,6 @@ function register_user($username, $user_firstname, $user_lastname, $email, $pass
         $password = mysqli_real_escape_string($connection, $password);
 
         $password = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12) );
-
-
-
-
-
 
         $query = "INSERT INTO users (username, user_firstname, user_lastname, user_email, user_password, user_role) ";
         $query .= "VALUES ('{$username}', '{$user_firstname}','{$user_lastname}','{$email}','{$password}','subscriber' )";
@@ -233,8 +250,60 @@ function register_user($username, $user_firstname, $user_lastname, $email, $pass
 
     //$message = "Your registration has been submitted";
 
-    } 
+     
 
 
 
+}
+
+function login_user($username, $password) {
+    global $connection;
+   $username = trim($username);
+   $password = trim($password);
+
+    $username = mysqli_real_escape_string($connection, $username);
+    $password = mysqli_real_escape_string($connection, $password);
+
+
+
+
+
+
+    //This is where i adjusted the login so that only users who are admins can login into the admin section by adding AND user_role = 'admin' to the query below
+
+
+
+
+
+    $query = "SELECT * FROM users WHERE username = '{$username}' ";
+    $select_user_query = mysqli_query($connection, $query);
+    if (!$select_user_query) {
+        die("QUERY FAILED". mysqli_error($connection));
+    }
+
+    while($row = mysqli_fetch_array($select_user_query)) {
+        $db_user_id = $row['user_id'];
+        $db_username = $row['username'];
+        $db_user_password = $row['user_password'];
+        $db_user_firstname = $row['user_firstname'];
+        $db_user_lastname = $row['user_lastname'];
+        $db_user_role = $row['user_role'];
+    }
+
+    //$password = crypt($password, $db_user_password);
+
+    if (password_verify($password, $db_user_password)) {
+
+        $_SESSION['username'] = $db_username;
+        $_SESSION['firstname'] = $db_user_firstname;
+        $_SESSION['lastname'] = $db_user_lastname;
+        $_SESSION['user_role'] = $db_user_role;
+
+       redirect("/My Coding/CMS/admin");
+
+       
+
+    } else {
+        redirect("/cms/index.php");
+    }
 }
