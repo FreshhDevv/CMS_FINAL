@@ -4,20 +4,8 @@
 
 
 
-
-
-
-
-
-
-
-
         <!-- Navigation -->
   <?php include "Includes/admin_navigation.php";?>
-
-
-
-
 
 
 

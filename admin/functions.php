@@ -6,7 +6,7 @@ function redirect($location) {
 
 function escape($string) {
     global $connection;
-    mysqli_real_escape_string($connection, trim($string));
+    return mysqli_real_escape_string($connection, trim($string));
 }
 
 
@@ -64,15 +64,22 @@ function insert_categories() {
         if($cat_title == "" || empty($cat_title)) {
             echo "This field should not be empty";
         } else {
-            $query = "INSERT INTO categories(cat_title) ";
-            $query .= "VALUE('{$cat_title}') ";
 
-            $create_category_query = mysqli_query($connection, $query);
 
-            if(!$create_category_query) {
+            $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?)");
+            
+            mysqli_stmt_bind_param($stmt, "s", $cat_title);
+
+            mysqli_stmt_execute($stmt);
+
+            
+
+            if(!$stmt) {
                 die("QUERY FAILED". mysqli_error($connection));
             }
         }
+
+        
     }
 }
 
@@ -250,9 +257,6 @@ function register_user($username, $user_firstname, $user_lastname, $email, $pass
 
     //$message = "Your registration has been submitted";
 
-     
-
-
 
 }
 
@@ -293,6 +297,8 @@ function login_user($username, $password) {
     //$password = crypt($password, $db_user_password);
 
     if (password_verify($password, $db_user_password)) {
+
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         $_SESSION['username'] = $db_username;
         $_SESSION['firstname'] = $db_user_firstname;

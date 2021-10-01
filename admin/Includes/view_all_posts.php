@@ -183,7 +183,7 @@ if(isset($_POST['checkBoxArray'])) {
         echo "<td><a class = 'btn btn-info' href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
 
         ?>
-        <form method="POST">
+        <form method="POST" action="">
             <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
 
             <?php
