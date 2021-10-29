@@ -1,7 +1,31 @@
 <?php
 
 function redirect($location) {
-    return header("Location:" . $location);
+    header("Location:" . $location);
+    exit;
+}
+
+function ifItIsMethod($method=null) {
+    if($_SERVER['REQUEST_METHOD'] == strtoupper($method)) {
+        return true;
+    }
+    return false;
+}
+
+function isLoggedIn() {
+    if(isset($_SESSION['user_role'])) {
+        return true;
+    }
+
+    return false;
+}
+
+//The function below will check if the user is loggedin and also redirect the user
+
+function checkIfUserIsLoggedInAndRedirect ($redirectLocation=null) {
+    if(isLoggedIn()) {
+         redirect($redirectLocation);
+    }
 }
 
 function escape($string) {
@@ -292,24 +316,29 @@ function login_user($username, $password) {
         $db_user_firstname = $row['user_firstname'];
         $db_user_lastname = $row['user_lastname'];
         $db_user_role = $row['user_role'];
+
+
+
+        if (password_verify($password, $db_user_password)) {
+
+            if (session_status() === PHP_SESSION_NONE) session_start();
+    
+            $_SESSION['username'] = $db_username;
+            $_SESSION['firstname'] = $db_user_firstname;
+            $_SESSION['lastname'] = $db_user_lastname;
+            $_SESSION['user_role'] = $db_user_role;
+    
+           redirect("/My Workspace/CMS/admin");
+    
+           
+    
+        } else {
+            return false;
+        }
+    }
+    return true;
     }
 
     //$password = crypt($password, $db_user_password);
 
-    if (password_verify($password, $db_user_password)) {
-
-        if (session_status() === PHP_SESSION_NONE) session_start();
-
-        $_SESSION['username'] = $db_username;
-        $_SESSION['firstname'] = $db_user_firstname;
-        $_SESSION['lastname'] = $db_user_lastname;
-        $_SESSION['user_role'] = $db_user_role;
-
-       redirect("/My Coding/CMS/admin");
-
-       
-
-    } else {
-        redirect("/cms/index.php");
-    }
-}
+  
