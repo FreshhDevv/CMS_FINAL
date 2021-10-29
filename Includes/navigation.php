@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/My Coding/CMS/">CMS Front</a>
+                <a class="navbar-brand" href="/My Workspace/CMS/">CMS Front</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -40,22 +40,38 @@
 
                     }
  
-                    echo "<li class = '$category_class'><a href='/My Coding/CMS/category/{$cat_id}'>{$cat_title}</a></li>";
+                    echo "<li class = '$category_class'><a href='/My Workspace/CMS/category/{$cat_id}'>{$cat_title}</a></li>";
 
 
                 }
 
                 ?>
 
+                <?php if(isLoggedIn()): ?>
 
                     <li>
-                        <a href="/My Coding/CMS/admin">Admin</a>
-                    </li>
-                    <li class='<?php echo $registration_class; ?>'>
-                        <a href="/My Coding/CMS/registration">Registration</a>
+                        <a href="/My Workspace/CMS/admin">Admin</a>
                     </li>
                     <li>
-                        <a href="/My Coding/CMS/contact">Contact</a>
+                        <a href="/My Workspace/CMS/includes/logout">Admin</a>
+                    </li>
+
+                    <?php else: ?>
+
+                        <li>
+                        <a href="/My Workspace/CMS/login">Login</a>
+                    </li>
+
+                <?php endif; ?>
+
+
+                    
+                   
+                    <li class='<?php echo $registration_class; ?>'>
+                        <a href="/My Workspace/CMS/registration">Registration</a>
+                    </li>
+                    <li>
+                        <a href="/My Workspace/CMS/contact">Contact</a>
                     </li>
 
                     <?php
@@ -66,7 +82,7 @@
                         if(isset($_GET['p_id'])) {
                         $the_post_id = $_GET['p_id'];
 
-                        echo "<li><a href='/My Coding/CMS/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+                        echo "<li><a href='/My Workspace/CMS/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
                         }
                         
                     }

@@ -2,7 +2,7 @@
  <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Weno Ndum Billy Hans 2021</p>
+                    <p>Copyright &copy; CMS by Weno Ndum Billy Hans</p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
