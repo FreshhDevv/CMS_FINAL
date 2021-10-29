@@ -1,0 +1,17 @@
+{
+    "name": "b-fresh/cms",
+    "require": {
+        "phpmailer/phpmailer": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "BFresh\\Cms\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Weno-Hans",
+            "email": "billyhans90@gmail.com"
+        }
+    ]
+}
