@@ -4,8 +4,8 @@
 
 <?php 
 
-require './vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
-require './classes/Config.php';
+require './vendor/autoload.php';
+
 
 if(!ifItIsMethod('get') && !isset($_GET['forgot'])) {
     redirect('index');
@@ -38,13 +38,14 @@ if(ifItIsMethod('post')) {
             $mail->SMTPSecure = 'tls';
             $mail->SMTPAuth = true;
             $mail->isHTML(true);
+            $mail->CharSet = 'UTF-8';
 
             $mail->setFrom('billyhans90@gmail.com', 'Billy Hans');
             $mail->addAddress($email);
 
             $mail->Subject = 'This is a test email';
 
-            $mail->Body = 'Email body';
+            $mail->Body = '<h1>cómo estás tu</h1>';
 
             if($mail->send()) {
                 echo "IT WAS SENT";

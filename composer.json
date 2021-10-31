@@ -4,10 +4,19 @@
         "phpmailer/phpmailer": "^6.5"
     },
     "autoload": {
+
+        "classmap": [
+            "classes"
+        ],
+
+
         "psr-4": {
             "BFresh\\Cms\\": "src/"
         }
     },
+
+    
+
     "authors": [
         {
             "name": "Weno-Hans",
