@@ -15,7 +15,7 @@
                 <ul class="nav navbar-nav">
 
                 <?php
-                $query = "SELECT * FROM categories LIMIT 3";
+                $query = "SELECT * FROM categories LIMIT 2";
                 $select_all_categories_query = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($select_all_categories_query)) {
@@ -53,12 +53,12 @@
                         <a href="/My Workspace/CMS/admin">Admin</a>
                     </li>
                     <li>
-                        <a href="/My Workspace/CMS/includes/logout">Admin</a>
+                        <a href="/My Workspace/CMS/includes/logout">Logout</a>
                     </li>
 
                     <?php else: ?>
 
-                        <li>
+                    <li>
                         <a href="/My Workspace/CMS/login">Login</a>
                     </li>
 

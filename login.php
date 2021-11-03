@@ -14,9 +14,6 @@ if(ifItIsMethod('post')) {
 }
 
 
-
-
-
 ?>
 
 

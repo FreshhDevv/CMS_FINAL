@@ -7,7 +7,7 @@
 require './vendor/autoload.php';
 
 
-if(!ifItIsMethod('get') && !isset($_GET['forgot'])) {
+if(!isset($_GET['forgot'])) {
     redirect('index');
 }
 
@@ -45,10 +45,19 @@ if(ifItIsMethod('post')) {
 
             $mail->Subject = 'This is a test email';
 
-            $mail->Body = '<h1>cómo estás tu</h1>';
+            $mail->Body = '<p>Please click to reset your password
+
+            <a href= "http://localhost/My Workspace/CMS/reset?email='.$email.'&token='.$token.'">http://localhost/My Workspace/CMS/reset?email='.$email.'&token='.$token.'</a>
+            
+            
+            </p>';
+            
+            
+            
+            
 
             if($mail->send()) {
-                echo "IT WAS SENT";
+                $emailSent = true;
             } else {
                 echo "NOT SENT";
             }
@@ -73,6 +82,8 @@ if(ifItIsMethod('post')) {
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="text-center">
+
+                        <?php if(!isset($emailSent)): ?>
 
 
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
@@ -99,6 +110,12 @@ if(ifItIsMethod('post')) {
                                     </form>
 
                                 </div><!-- Body-->
+
+                                <?php else: ?>
+
+                                    <h2>Please check your email</h2>
+
+                                <?php endif; ?>
 
                         </div>
                     </div>
