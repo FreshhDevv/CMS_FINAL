@@ -56,8 +56,6 @@
                 $query = "SELECT * FROM posts LIMIT $page_1, $per_page";
 
 
-
-
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
@@ -70,11 +68,7 @@
                     $post_status = $row['post_status'];
 
 
-
-
-
             ?>
-
 
 
                     <h1 class="page-header">
@@ -110,22 +104,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
         </div>
 
         <!-- Blog Sidebar Widgets Column -->
         <?php include "Includes/sidebar.php"; ?>
-
-
 
 
     </div>
