@@ -40,7 +40,7 @@
 
                     }
  
-                    echo "<li class = '$category_class'><a href='/My Workspace/CMS/category/{$cat_id}'>{$cat_title}</a></li>";
+                    echo "<li class = '$category_class'><a href='/PHP Workspace/CMS_FINAL/category/{$cat_id}'>{$cat_title}</a></li>";
 
 
                 }
@@ -50,16 +50,16 @@
                 <?php if(isLoggedIn()): ?>
 
                     <li>
-                        <a href="/My Workspace/CMS/admin">Admin</a>
+                        <a href="/PHP Workspace/CMS_FINAL/admin">Admin</a>
                     </li>
                     <li>
-                        <a href="/My Workspace/CMS/includes/logout">Logout</a>
+                        <a href="/PHP Workspace/CMS_FINAL/includes/logout">Logout</a>
                     </li>
 
                     <?php else: ?>
 
                     <li>
-                        <a href="/My Workspace/CMS/login">Login</a>
+                        <a href="/PHP Workspace/CMS_FINAL/login">Login</a>
                     </li>
 
                 <?php endif; ?>
@@ -68,7 +68,7 @@
                     
                    
                     <li class='<?php echo $registration_class; ?>'>
-                        <a href="/My Workspace/CMS/registration">Registration</a>
+                        <a href="/PHP Workspace/CMS_FINAL/registration">Registration</a>
                     </li>
                     <li>
                         <a href="/My Workspace/CMS/contact">Contact</a>
