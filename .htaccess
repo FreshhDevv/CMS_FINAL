@@ -1,3 +1,3 @@
 RewriteEngine on
 
-RewriteRule ^(index|contact|registration|category)$ $1.php [NC,L]
+RewriteRule ^(index|contact|registration|category|login|contact|admin)$ $1.php [NC,L]
