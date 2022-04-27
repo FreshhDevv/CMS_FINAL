@@ -71,7 +71,7 @@
                         <a href="/PHP Workspace/CMS_FINAL/registration">Registration</a>
                     </li>
                     <li>
-                        <a href="/My Workspace/CMS/contact">Contact</a>
+                        <a href="/PHP Workspace/CMS_FINAL/contact">Contact</a>
                     </li>
 
                     <?php
@@ -82,7 +82,7 @@
                         if(isset($_GET['p_id'])) {
                         $the_post_id = $_GET['p_id'];
 
-                        echo "<li><a href='/My Workspace/CMS/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+                        echo "<li><a href='/PHP Workspace/CMS_FINAL/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
                         }
                         
                     }

@@ -3,13 +3,13 @@
 
 <?php
 
-checkIfUserIsLoggedInAndRedirect('/CMS/admin');
+checkIfUserIsLoggedInAndRedirect('PHP Workspace/CMS_FINAL/admin');
 
 if (ifItIsMethod('post')) {
 	if (isset($_POST['username']) && isset($_POST['password'])) {
 		login_user($_POST['username'], $_POST['password']);
 	} else {
-		redirect('/CMS/login');
+		redirect('PHP Workspace/CMS_FINAL/login');
 	}
 }
 
