@@ -328,7 +328,7 @@ function login_user($username, $password) {
             $_SESSION['lastname'] = $db_user_lastname;
             $_SESSION['user_role'] = $db_user_role;
     
-           redirect("/My Workspace/CMS/admin");
+           redirect("/PHP Workspace/CMS_FINAL/admin");
     
            
     
