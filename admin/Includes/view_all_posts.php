@@ -71,7 +71,7 @@ if (isset($_POST['checkBoxArray'])) {
             </select>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-8">
             <input type="submit" name="submit" class="btn btn-success" value="Apply">
             <a class="btn btn-primary" href="posts.php?source=add_post">Add New</a>
         </div>
@@ -162,8 +162,9 @@ if (isset($_POST['checkBoxArray'])) {
                 $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
                 $send_comment_query = mysqli_query($connection, $query);
 
-                $row = mysqli_fetch_array($send_comment_query);
-                $comment_id = $row['comment_id'];
+                $row = mysqli_fetch_assoc($send_comment_query);
+               // $comment_id = $row['comment_post_id'];
+               // exit("COMMENTID =($comment_id) AND POSTID($post_id)");
                 $count_comments = mysqli_num_rows($send_comment_query);
 
 
