@@ -36,6 +36,7 @@
                     } else if ($pageName == $registration) {
 
                         $registration_class = 'active';
+
                     }
 
                     echo "<li class = '$category_class'><a href='/PHP Workspace/CMS_FINAL/category/{$cat_id}'>{$cat_title}</a></li>";
@@ -50,7 +51,7 @@
                         
                     </li>
                     <li>
-                        <a href="/PHP Workspace/CMS_FINAL/includes/logout">Logout</a>
+                        <a href="includes/logout.php">Logout</a>
                     </li>
 
                 <?php else : ?>
@@ -63,11 +64,10 @@
 
 
 
-
                 <li class='<?php echo $registration_class; ?>'>
                     <a href="/PHP Workspace/CMS_FINAL/registration">Registration</a>
                 </li>
-                <li>
+                <li class='<?php echo $contact_class;?>'>
                     <a href="/PHP Workspace/CMS_FINAL/contact">Contact</a>
                 </li>
 
